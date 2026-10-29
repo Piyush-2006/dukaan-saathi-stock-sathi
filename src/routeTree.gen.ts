@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SalesRouteImport } from './routes/sales'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as UdhaarRouteImport } from './routes/udhaar'
+import { Route as VoiceRouteImport } from './routes/voice'
+import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
+import { Route as ApiPublicProductsRouteImport } from './routes/api/public/products'
+import { Route as ApiPublicSalesRouteImport } from './routes/api/public/sales'
+import { Route as ApiPublicProductsIdStockRouteImport } from './routes/api/public/products.$id.stock'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalesRoute = SalesRouteImport.update({
+  id: '/sales',
+  path: '/sales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UdhaarRoute = UdhaarRouteImport.update({
+  id: '/udhaar',
+  path: '/udhaar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VoiceRoute = VoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
+  id: '/api/public/health',
+  path: '/api/public/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicProductsRoute = ApiPublicProductsRouteImport.update({
+  id: '/api/public/products',
+  path: '/api/public/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSalesRoute = ApiPublicSalesRouteImport.update({
+  id: '/api/public/sales',
+  path: '/api/public/sales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicProductsIdStockRoute =
+  ApiPublicProductsIdStockRouteImport.update({
+    id: '/$id/stock',
+    path: '/$id/stock',
+    getParentRoute: () => ApiPublicProductsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/sales': typeof SalesRoute
+  '/settings': typeof SettingsRoute
+  '/udhaar': typeof UdhaarRoute
+  '/voice': typeof VoiceRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/products': typeof ApiPublicProductsRouteWithChildren
+  '/api/public/sales': typeof ApiPublicSalesRoute
+  '/api/public/products/$id/stock': typeof ApiPublicProductsIdStockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/sales': typeof SalesRoute
+  '/settings': typeof SettingsRoute
+  '/udhaar': typeof UdhaarRoute
+  '/voice': typeof VoiceRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/products': typeof ApiPublicProductsRouteWithChildren
+  '/api/public/sales': typeof ApiPublicSalesRoute
+  '/api/public/products/$id/stock': typeof ApiPublicProductsIdStockRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/sales': typeof SalesRoute
+  '/settings': typeof SettingsRoute
+  '/udhaar': typeof UdhaarRoute
+  '/voice': typeof VoiceRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/products': typeof ApiPublicProductsRouteWithChildren
+  '/api/public/sales': typeof ApiPublicSalesRoute
+  '/api/public/products/$id/stock': typeof ApiPublicProductsIdStockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/products'
+    | '/reports'
+    | '/sales'
+    | '/settings'
+    | '/udhaar'
+    | '/voice'
+    | '/api/public/health'
+    | '/api/public/products'
+    | '/api/public/sales'
+    | '/api/public/products/$id/stock'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/products'
+    | '/reports'
+    | '/sales'
+    | '/settings'
+    | '/udhaar'
+    | '/voice'
+    | '/api/public/health'
+    | '/api/public/products'
+    | '/api/public/sales'
+    | '/api/public/products/$id/stock'
+  id:
+    | '__root__'
+    | '/'
+    | '/products'
+    | '/reports'
+    | '/sales'
+    | '/settings'
+    | '/udhaar'
+    | '/voice'
+    | '/api/public/health'
+    | '/api/public/products'
+    | '/api/public/sales'
+    | '/api/public/products/$id/stock'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsRoute: typeof ProductsRoute
+  ReportsRoute: typeof ReportsRoute
+  SalesRoute: typeof SalesRoute
+  SettingsRoute: typeof SettingsRoute
+  UdhaarRoute: typeof UdhaarRoute
+  VoiceRoute: typeof VoiceRoute
+  ApiPublicHealthRoute: typeof ApiPublicHealthRoute
+  ApiPublicProductsRoute: typeof ApiPublicProductsRouteWithChildren
+  ApiPublicSalesRoute: typeof ApiPublicSalesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,101 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sales': {
+      id: '/sales'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof SalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/udhaar': {
+      id: '/udhaar'
+      path: '/udhaar'
+      fullPath: '/udhaar'
+      preLoaderRoute: typeof UdhaarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/voice': {
+      id: '/voice'
+      path: '/voice'
+      fullPath: '/voice'
+      preLoaderRoute: typeof VoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/health': {
+      id: '/api/public/health'
+      path: '/api/public/health'
+      fullPath: '/api/public/health'
+      preLoaderRoute: typeof ApiPublicHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/products': {
+      id: '/api/public/products'
+      path: '/api/public/products'
+      fullPath: '/api/public/products'
+      preLoaderRoute: typeof ApiPublicProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/sales': {
+      id: '/api/public/sales'
+      path: '/api/public/sales'
+      fullPath: '/api/public/sales'
+      preLoaderRoute: typeof ApiPublicSalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/products/$id/stock': {
+      id: '/api/public/products/$id/stock'
+      path: '/$id/stock'
+      fullPath: '/api/public/products/$id/stock'
+      preLoaderRoute: typeof ApiPublicProductsIdStockRouteImport
+      parentRoute: typeof ApiPublicProductsRoute
+    }
   }
 }
 
+interface ApiPublicProductsRouteChildren {
+  ApiPublicProductsIdStockRoute: typeof ApiPublicProductsIdStockRoute
+}
+
+const ApiPublicProductsRouteChildren: ApiPublicProductsRouteChildren = {
+  ApiPublicProductsIdStockRoute: ApiPublicProductsIdStockRoute,
+}
+
+const ApiPublicProductsRouteWithChildren =
+  ApiPublicProductsRoute._addFileChildren(ApiPublicProductsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsRoute: ProductsRoute,
+  ReportsRoute: ReportsRoute,
+  SalesRoute: SalesRoute,
+  SettingsRoute: SettingsRoute,
+  UdhaarRoute: UdhaarRoute,
+  VoiceRoute: VoiceRoute,
+  ApiPublicHealthRoute: ApiPublicHealthRoute,
+  ApiPublicProductsRoute: ApiPublicProductsRouteWithChildren,
+  ApiPublicSalesRoute: ApiPublicSalesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
