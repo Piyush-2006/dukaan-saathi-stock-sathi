@@ -88,8 +88,8 @@ function SettingsPage() {
         </h3>
         <p className="mt-1 text-xs text-muted-foreground">
           The frontend uses this same-origin API through its service layer
-          {import.meta.env.VITE_API_URL
-            ? ` (override active: ${import.meta.env.VITE_API_URL})`
+          {import.meta.env["VITE_API_URL"]
+            ? ` (override active: ${import.meta.env["VITE_API_URL"]})`
             : ". Set VITE_API_URL to point it at a different backend."}
         </p>
         <ul className="mt-3 space-y-2">
