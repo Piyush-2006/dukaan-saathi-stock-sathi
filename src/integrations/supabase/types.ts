@@ -14,13 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      products: {
+        Row: {
+          created_at: string
+          id: number
+          low_stock_threshold: number
+          name: string
+          quantity: number
+          selling_price: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          low_stock_threshold?: number
+          name: string
+          quantity?: number
+          selling_price: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          low_stock_threshold?: number
+          name?: string
+          quantity?: number
+          selling_price?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sales: {
+        Row: {
+          created_at: string
+          id: number
+          product_id: number
+          quantity: number
+          total_amount: number
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          product_id: number
+          quantity: number
+          total_amount: number
+          unit_price: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          product_id?: number
+          quantity?: number
+          total_amount?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      record_sale: {
+        Args: { p_product_id: number; p_quantity: number }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never
