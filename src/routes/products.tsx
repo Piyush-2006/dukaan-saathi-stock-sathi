@@ -247,7 +247,12 @@ function AddProductDialog({
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [threshold, setThreshold] = useState("5");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    price?: string;
+    quantity?: string;
+    threshold?: string;
+  }>({});
 
   useEffect(() => {
     if (open) {
@@ -277,7 +282,12 @@ function AddProductDialog({
   });
 
   function submit() {
-    const next: Record<string, string> = {};
+    const next: {
+      name?: string;
+      price?: string;
+      quantity?: string;
+      threshold?: string;
+    } = {};
     if (!name.trim()) next.name = "Product name is required";
     const priceNum = Number(price);
     if (!price || Number.isNaN(priceNum) || priceNum <= 0) {
