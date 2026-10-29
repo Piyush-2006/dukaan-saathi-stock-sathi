@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
+import { Route as ApiPublicProductsRouteImport } from './routes/api/public/products'
+import { Route as ApiPublicSalesRouteImport } from './routes/api/public/sales'
+import { Route as ApiPublicProductsIdStockRouteImport } from './routes/api/public/products.$id.stock'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
+  id: '/api/public/health',
+  path: '/api/public/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicProductsRoute = ApiPublicProductsRouteImport.update({
+  id: '/api/public/products',
+  path: '/api/public/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSalesRoute = ApiPublicSalesRouteImport.update({
+  id: '/api/public/sales',
+  path: '/api/public/sales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicProductsIdStockRoute =
+  ApiPublicProductsIdStockRouteImport.update({
+    id: '/$id/stock',
+    path: '/$id/stock',
+    getParentRoute: () => ApiPublicProductsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/products': typeof ApiPublicProductsRouteWithChildren
+  '/api/public/sales': typeof ApiPublicSalesRoute
+  '/api/public/products/$id/stock': typeof ApiPublicProductsIdStockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/products': typeof ApiPublicProductsRouteWithChildren
+  '/api/public/sales': typeof ApiPublicSalesRoute
+  '/api/public/products/$id/stock': typeof ApiPublicProductsIdStockRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/products': typeof ApiPublicProductsRouteWithChildren
+  '/api/public/sales': typeof ApiPublicSalesRoute
+  '/api/public/products/$id/stock': typeof ApiPublicProductsIdStockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/public/health'
+    | '/api/public/products'
+    | '/api/public/sales'
+    | '/api/public/products/$id/stock'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/public/health'
+    | '/api/public/products'
+    | '/api/public/sales'
+    | '/api/public/products/$id/stock'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/health'
+    | '/api/public/products'
+    | '/api/public/sales'
+    | '/api/public/products/$id/stock'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicHealthRoute: typeof ApiPublicHealthRoute
+  ApiPublicProductsRoute: typeof ApiPublicProductsRouteWithChildren
+  ApiPublicSalesRoute: typeof ApiPublicSalesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/health': {
+      id: '/api/public/health'
+      path: '/api/public/health'
+      fullPath: '/api/public/health'
+      preLoaderRoute: typeof ApiPublicHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/products': {
+      id: '/api/public/products'
+      path: '/api/public/products'
+      fullPath: '/api/public/products'
+      preLoaderRoute: typeof ApiPublicProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/sales': {
+      id: '/api/public/sales'
+      path: '/api/public/sales'
+      fullPath: '/api/public/sales'
+      preLoaderRoute: typeof ApiPublicSalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/products/$id/stock': {
+      id: '/api/public/products/$id/stock'
+      path: '/$id/stock'
+      fullPath: '/api/public/products/$id/stock'
+      preLoaderRoute: typeof ApiPublicProductsIdStockRouteImport
+      parentRoute: typeof ApiPublicProductsRoute
+    }
   }
 }
 
+interface ApiPublicProductsRouteChildren {
+  ApiPublicProductsIdStockRoute: typeof ApiPublicProductsIdStockRoute
+}
+
+const ApiPublicProductsRouteChildren: ApiPublicProductsRouteChildren = {
+  ApiPublicProductsIdStockRoute: ApiPublicProductsIdStockRoute,
+}
+
+const ApiPublicProductsRouteWithChildren =
+  ApiPublicProductsRoute._addFileChildren(ApiPublicProductsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicHealthRoute: ApiPublicHealthRoute,
+  ApiPublicProductsRoute: ApiPublicProductsRouteWithChildren,
+  ApiPublicSalesRoute: ApiPublicSalesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
