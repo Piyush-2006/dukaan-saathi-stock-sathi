@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as SalesRouteImport } from './routes/sales'
 import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
 import { Route as ApiPublicProductsRouteImport } from './routes/api/public/products'
 import { Route as ApiPublicSalesRouteImport } from './routes/api/public/sales'
@@ -18,6 +20,16 @@ import { Route as ApiPublicProductsIdStockRouteImport } from './routes/api/publi
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalesRoute = SalesRouteImport.update({
+  id: '/sales',
+  path: '/sales',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
@@ -44,6 +56,8 @@ const ApiPublicProductsIdStockRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products': typeof ProductsRoute
+  '/sales': typeof SalesRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/products': typeof ApiPublicProductsRouteWithChildren
   '/api/public/sales': typeof ApiPublicSalesRoute
@@ -51,6 +65,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products': typeof ProductsRoute
+  '/sales': typeof SalesRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/products': typeof ApiPublicProductsRouteWithChildren
   '/api/public/sales': typeof ApiPublicSalesRoute
@@ -59,6 +75,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products': typeof ProductsRoute
+  '/sales': typeof SalesRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/products': typeof ApiPublicProductsRouteWithChildren
   '/api/public/sales': typeof ApiPublicSalesRoute
@@ -68,6 +86,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/products'
+    | '/sales'
     | '/api/public/health'
     | '/api/public/products'
     | '/api/public/sales'
@@ -75,6 +95,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/products'
+    | '/sales'
     | '/api/public/health'
     | '/api/public/products'
     | '/api/public/sales'
@@ -82,6 +104,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/products'
+    | '/sales'
     | '/api/public/health'
     | '/api/public/products'
     | '/api/public/sales'
@@ -90,6 +114,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsRoute: typeof ProductsRoute
+  SalesRoute: typeof SalesRoute
   ApiPublicHealthRoute: typeof ApiPublicHealthRoute
   ApiPublicProductsRoute: typeof ApiPublicProductsRouteWithChildren
   ApiPublicSalesRoute: typeof ApiPublicSalesRoute
@@ -102,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sales': {
+      id: '/sales'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof SalesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/health': {
@@ -148,6 +188,8 @@ const ApiPublicProductsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsRoute: ProductsRoute,
+  SalesRoute: SalesRoute,
   ApiPublicHealthRoute: ApiPublicHealthRoute,
   ApiPublicProductsRoute: ApiPublicProductsRouteWithChildren,
   ApiPublicSalesRoute: ApiPublicSalesRoute,
