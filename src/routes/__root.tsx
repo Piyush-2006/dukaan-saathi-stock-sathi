@@ -4,14 +4,13 @@ import {
   Link,
   Outlet,
   Scripts,
-  SidebarTrigger,
   createRootRouteWithContext,
   useRouter,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { Separator } from "@/components/ui/separator";
-import { Toaster } from "@/components/ui/sonner";
+import { SidebarTrigger, Toaster } from "@/components/ui/sonner";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import appCss from "../styles.css?url";

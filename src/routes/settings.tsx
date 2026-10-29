@@ -20,7 +20,7 @@ export const Route = createFileRoute("/settings")({
         property: "og:description",
         content: "Backend connection status, API endpoints and app information.",
       },
-      { property: "og:type", content": "website" },
+      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

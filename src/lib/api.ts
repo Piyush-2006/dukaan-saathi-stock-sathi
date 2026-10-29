@@ -8,7 +8,7 @@ import type { Health, NewProduct, Product, Sale } from "./types";
  * Set VITE_API_URL to point the layer at a different backend; by default the
  * app talks to its own backend.
  */
-const API_BASE = import.meta.env.VITE_API_URL ?? "";
+const API_BASE = import.meta.env["VITE_API_URL"] ?? "";
 
 export class ApiError extends Error {
   status: number;
