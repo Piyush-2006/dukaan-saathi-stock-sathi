@@ -1,23 +1,17 @@
-# DUKAANSAATHI AI — Rebuild Roadmap
+# DUKAANSAATHI AI — Upgrade Roadmap (incremental, no rebuild)
 
-Rebuild from scratch on TanStack Start + Lovable Cloud. Backend exposes the same API contracts
-(`GET /health`, `GET /products`, `POST /products`, `PATCH /products/{id}/stock`, `GET /sales`,
-`POST /sales`) as TanStack server routes; frontend talks to them through a reusable API service layer.
+Upgrade brief: user-uploaded `Upgrade_my_existing_project_DukaanSaathi_AI_into_pasted.md`.
+Existing stack (TanStack Start + Lovable Cloud, products/sales + record_sale) stays as-is.
 
 ## Tasks
-
-- [x] Enable Lovable Cloud
-- [x] Database migration: `products`, `sales`, transactional `record_sale` function, seed demo inventory + sales
-- [x] Design system: deep-green primary, warm off-white bg, charcoal text, state colors, fonts in styles.css + root head
-- [x] API service layer + shared types + formatting utils (`src/lib/api.ts`, `src/lib/types.ts`, `src/lib/format.ts`)
-- [x] App shell: sidebar (desktop) + mobile drawer, page header, backend status, refresh, footer, 7 nav sections
-- [x] Dashboard page (real metrics, quick actions, recent sales, low-stock list)
-- [x] Products & Stock page (search, add form, stock update, status badges, responsive table/cards)
-- [x] Sales page (product selector, qty, bill total, confirm, POST /sales, history, today's revenue)
-- [x] Udhaar page (honest placeholder: no fake data, no claimed persistence)
-- [x] AI Voice Assistant page (honest placeholder: mic UI, no simulated processing)
-- [x] Reports page (daily/monthly summaries, product performance from real sales, low-stock insights)
-- [x] Settings page (connection info, endpoint list, version)
-- [x] Head metadata on every route; Toaster mounted; tests for routing + stock-state/INR rules
-- [x] Verify: build clean, tests pass, Playwright walk-through of demo flow
-- [x] Final report: working / incomplete / files changed / env config
+- [x] (previously) Full rebuild on Lovable Cloud — 7 sections, real backend, seed demo data
+- [ ] 1. Design polish: saffron accent tokens, refined surfaces, personalized shop-name welcome (Settings-stored shop name)
+- [ ] 2. Shared insights module `src/lib/insights.ts` (best sellers, slow movers, reorder suggestions, trends, briefing rules) + unit tests
+- [ ] 3. Dashboard: "Today's Shop Briefing" card (3 traceable rule-based recommendations, prev-day comparison)
+- [ ] 4. Shop Intelligence Center `/intelligence` (period selector, real calculations, explanations, labeled estimates)
+- [ ] 5. AI Business Copilot `/copilot` — streaming chat grounded in shop data via Lovable AI Gateway server route; loading/empty/error/retry; suggested follow-ups; chat history persisted
+- [ ] 6. Close Shop `/close-shop` — end-of-day summary + printable daily report
+- [ ] 7. Hindi/English language selector (nav + key labels), html lang sync
+- [ ] 8. Sidebar/nav reorg for new pages; voice page stays honest placeholder
+- [ ] 9. Verify: tests, Playwright walk-through (product add, sale record, stock deduction, intelligence, briefing, close-shop), build clean
+- [ ] 10. Final report: files changed, features completed, config still required
