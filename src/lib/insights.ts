@@ -217,7 +217,7 @@ export function buildBriefing(
   const yesterdayRevenue = yesterdaySales.reduce((sum, s) => sum + s.total_amount, 0);
 
   const comparison: Briefing["comparison"] =
-    todayTransactionsOrZero(todaySales.length) === 0 && yesterdaySales.length === 0
+    todaySales.length === 0 && yesterdaySales.length === 0
       ? null
       : {
           direction:
@@ -310,18 +310,13 @@ export function buildBriefing(
   };
 }
 
-function todayTransactionsOrZero(n: number): number {
-  return n;
-}
-
 function joinNames(products: Product[]): string {
   const names = products.map((p) => p.name);
-  if (names.length <= 3) return names.join(" and ").replace(/ and ([^ and]*)$/, nameOf(names));
+  if (names.length === 1) return names[0];
+  if (names.length <= 3) {
+    return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+  }
   return `${names.slice(0, 2).join(", ")} and ${names.length - 2} more`;
-}
-
-function nameOf(names: string[]): string {
-  return ` and ${names[names.length - 1]}`.slice(0, 0) + names[names.length - 1];
 }
 
 // ---------------------------------------------------------------- close shop
