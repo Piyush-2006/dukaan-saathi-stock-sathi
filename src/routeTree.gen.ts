@@ -16,6 +16,7 @@ import { Route as SalesRouteImport } from './routes/sales'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as UdhaarRouteImport } from './routes/udhaar'
 import { Route as VoiceRouteImport } from './routes/voice'
+import { Route as ApiCopilotRouteImport } from './routes/api/copilot'
 import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
 import { Route as ApiPublicProductsRouteImport } from './routes/api/public/products'
 import { Route as ApiPublicSalesRouteImport } from './routes/api/public/sales'
@@ -56,6 +57,11 @@ const VoiceRoute = VoiceRouteImport.update({
   path: '/voice',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCopilotRoute = ApiCopilotRouteImport.update({
+  id: '/api/copilot',
+  path: '/api/copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
   id: '/api/public/health',
   path: '/api/public/health',
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/udhaar': typeof UdhaarRoute
   '/voice': typeof VoiceRoute
+  '/api/copilot': typeof ApiCopilotRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/products': typeof ApiPublicProductsRouteWithChildren
   '/api/public/sales': typeof ApiPublicSalesRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/udhaar': typeof UdhaarRoute
   '/voice': typeof VoiceRoute
+  '/api/copilot': typeof ApiCopilotRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/products': typeof ApiPublicProductsRouteWithChildren
   '/api/public/sales': typeof ApiPublicSalesRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/udhaar': typeof UdhaarRoute
   '/voice': typeof VoiceRoute
+  '/api/copilot': typeof ApiCopilotRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/products': typeof ApiPublicProductsRouteWithChildren
   '/api/public/sales': typeof ApiPublicSalesRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/udhaar'
     | '/voice'
+    | '/api/copilot'
     | '/api/public/health'
     | '/api/public/products'
     | '/api/public/sales'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/udhaar'
     | '/voice'
+    | '/api/copilot'
     | '/api/public/health'
     | '/api/public/products'
     | '/api/public/sales'
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/udhaar'
     | '/voice'
+    | '/api/copilot'
     | '/api/public/health'
     | '/api/public/products'
     | '/api/public/sales'
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   UdhaarRoute: typeof UdhaarRoute
   VoiceRoute: typeof VoiceRoute
+  ApiCopilotRoute: typeof ApiCopilotRoute
   ApiPublicHealthRoute: typeof ApiPublicHealthRoute
   ApiPublicProductsRoute: typeof ApiPublicProductsRouteWithChildren
   ApiPublicSalesRoute: typeof ApiPublicSalesRoute
@@ -224,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VoiceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/copilot': {
+      id: '/api/copilot'
+      path: '/api/copilot'
+      fullPath: '/api/copilot'
+      preLoaderRoute: typeof ApiCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/health': {
       id: '/api/public/health'
       path: '/api/public/health'
@@ -274,6 +294,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   UdhaarRoute: UdhaarRoute,
   VoiceRoute: VoiceRoute,
+  ApiCopilotRoute: ApiCopilotRoute,
   ApiPublicHealthRoute: ApiPublicHealthRoute,
   ApiPublicProductsRoute: ApiPublicProductsRouteWithChildren,
   ApiPublicSalesRoute: ApiPublicSalesRoute,
